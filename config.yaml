@@ -127,16 +127,16 @@ dns:
 pr: &pr {type: select, proxies: [🚀 默认代理, 直连, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点]}
 proxy-groups:
   - {name: 🚀 默认代理, type: select, include-all: true}
-  - {name: 📹 YouTube, <<: *pr}
-
   - {name: 📖 Ehentai, <<: *pr}
-  - {name: 🍀 Google, <<: *pr}
+  - {name: 📹 YouTube, <<: *pr}
+  - {name: 🔍️ Google, <<: *pr}
   - {name: 🤖 境外AI, <<: *pr}
   - {name: 👨🏿‍💻 GitHub, <<: *pr}
   - {name: 🐬 OneDrive, <<: *pr}
   - {name: 🪟 Microsoft, <<: *pr}
   #- {name: 🎵 TikTok, <<: *pr}
   - {name: 📲 Telegram, <<: *pr}
+  - {name: 🐦 Twitter, <<: *pr}
   - {name: 🎥 NETFLIX, <<: *pr}
   - {name: ✈️ Speedtest, <<: *pr}
   - {name: 💶 PayPal, <<: *pr}
@@ -164,24 +164,27 @@ proxy-groups:
 rules:
   - RULE-SET,private_ip,直连
   - RULE-SET,private_domain,直连
+
+  - RULE-SET,category_ads_all,🍃 AdBlock
+
   - RULE-SET,apple_cn_domain,🍎 苹果中国
   - RULE-SET,microsoft_cn_domain,🪟 微软中国
+  - RULE-SET,onedrive_domain,🐬 OneDrive
   - RULE-SET,game_download,🎮 游戏下载
   - RULE-SET,category_games_cn,🎯 直连
 
-
   #网址操作
   - RULE-SET,proxy_dns,🚀 默认代理
+  - RULE-SET,ehentai_domain,📖 Ehentai
+  - RULE-SET,youtube_domain,📹 YouTube
+  - RULE-SET,google_domain,🔍️ Google
   - RULE-SET,ai,🤖 境外AI
   - RULE-SET,github_domain,👨🏿‍💻 GitHub
-  - RULE-SET,youtube_domain,📹 YouTube
-  - RULE-SET,google_domain,🍀 Google
-  - RULE-SET,onedrive_domain,🐬 OneDrive
   - RULE-SET,microsoft_domain,🪟 Microsoft
   #- RULE-SET,tiktok_domain,🎵 TikTok
   - RULE-SET,speedtest_domain,✈️ Speedtest
-  - RULE-SET,ehentai_domain,📖 Ehentai
   - RULE-SET,telegram_domain,📲 Telegram
+  - RULE-SET,twitter_domain,🐦 Twitter
   - RULE-SET,netflix_domain,🎥 NETFLIX
   - RULE-SET,paypal_domain,💶 PayPal
   - RULE-SET,gfw_domain,🚀 默认代理
@@ -190,13 +193,13 @@ rules:
   - RULE-SET,cn_domain,🎯 直连
 
   #ip操作
-  - RULE-SET,google_ip,🍀 Google,no-resolve
+  - RULE-SET,google_ip,🔍️ Google,no-resolve
   - RULE-SET,netflix_ip,🎥 NETFLIX,no-resolve
   - RULE-SET,telegram_ip,📲 Telegram,no-resolve
+  - RULE-SET,twitter_ip,🐦 Twitter,no-resolve
   - RULE-SET,cn_ip,🎯 直连
 
 
-  - RULE-SET,category-ads-all,🍃 AdBlock
   - MATCH,🐟 漏网之鱼
 
 # 规则集
@@ -211,7 +214,7 @@ rule-providers:
   private_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"}
   #国内网址
   cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"}
-
+  #国内游戏
   category_games_cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-games%40cn.mrs"}
 
   #国内ip
@@ -219,13 +222,13 @@ rule-providers:
   #国内服务
   apple_cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-cn.mrs"}
   microsoft_cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/microsoft%40cn.mrs"}
+
   #游戏下载
   game_download: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-game-platforms-download%40cn.mrs"}
 
-
   #拒绝服务
   #广告
-  category-ads-all: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.mrs"}
+  category_ads_all: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.mrs"}
 
   #代理
   #国外DNS
@@ -243,17 +246,17 @@ rule-providers:
   microsoft_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"}
   speedtest_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs"}
   ehentai_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ehentai.mrs"}
+  #tiktok_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"}
+  twitter_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"}
+
 
   #国外ip
   google_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"}
   telegram_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"}
   netflix_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"}
+  twitter_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs"}
 
-
-  #tiktok_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"}
+  #兜底
   gfw_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"}
   geolocation-!cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"}
   
-
-
-
